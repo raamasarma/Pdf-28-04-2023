@@ -39,7 +39,6 @@
   background-color: blue;
     text-align: center;
     }
-
 .footer_bar {
    position: fixed;
    left: 0;
@@ -83,9 +82,15 @@ input#invDate{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
-
+  input#paymentDate{
+  width:150px;
+  border:1px solid blue;
+  border-radius:2px
+  outline:0;
+  padding:2px;
+  background-colour:#fff;
+  }
 #supplierName{
   width:250px;
   border:1px solid blue;
@@ -93,7 +98,6 @@ input#invDate{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
 input#quantity{
   width:70px;
@@ -102,7 +106,6 @@ input#quantity{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
   input#fatP{
   width:70px;
@@ -111,7 +114,6 @@ input#quantity{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
   input#snfP{
   width:70px;
@@ -120,7 +122,6 @@ input#quantity{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
   input#tsRate{
   width:70px;
@@ -129,7 +130,6 @@ input#quantity{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
   #milkType{
   width:70px;
@@ -138,7 +138,6 @@ input#quantity{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
   #paymentStatus{
   width:150px;
@@ -147,9 +146,7 @@ input#quantity{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
   }
-
   #vehicleNo{
   width:100px;
   border:1px solid blue;
@@ -157,7 +154,22 @@ input#quantity{
   outline:0;
   padding:2px;
   background-colour:#fff;
-
+  }
+  #bankName{
+  width:150px;
+  border:1px solid blue;
+  border-radius:2px
+  outline:0;
+  padding:2px;
+  background-colour:#fff;
+  }
+  #bankIfsc{
+  width:150px;
+  border:1px solid blue;
+  border-radius:2px
+  outline:0;
+  padding:2px;
+  background-colour:#fff;
   }
     </style>
 </head>
@@ -194,6 +206,13 @@ input#quantity{
       </select>
     </div>
     <div class="col">
+      <label for="milkType">Milk Type</label>
+      <select id="milkType" class="form-control" name="milkType" >
+        <option>CM</option>
+        <option>BM</option>
+      </select>
+    </div>
+    <div class="col">
       <label for="quantity">Qty In KG's</label>
       <input
               type="text"
@@ -214,7 +233,6 @@ input#quantity{
               maxlength="4-5" pattern="\d{5}"
       />
     </div>
-
     <div class="col">
       <label for="snfP">SNF</label>
       <input
@@ -225,7 +243,6 @@ input#quantity{
               class="form-control"  maxlength="5-12" pattern="\d{5}"
       />
     </div>
-
     <div class="col">
       <label for="tsRate">TS Rate</label>
       <input
@@ -234,17 +251,10 @@ input#quantity{
               id="tsRate"
               th:field="*{tsRate}"
               class="form-control"  maxlength="300-400" pattern="\d{5}"
-
       />
     </div>
-    <div class="col">
-      <label for="milkType">Milk Type</label>
-      <select id="milkType" class="form-control" name="milkType" >
-        <option>CM</option>
-        <option>BM</option>
-      </select>
     </div>
-    </div>
+    <br>
     <div class="row auto-align">
     <div class="col-2">
       <label for="paymentStatus">Payment Status</label>
@@ -255,40 +265,51 @@ input#quantity{
         <option value="Invoice Not Sent">Invoice Not Sent</option>
       </select>
     </div>
-    <div id="hide">
-    <div class="col-2">
-      <label for="bankName">Bank Name</label>
-      <select id="bankName" class="form-control" name="bankName" >
-      <option th:each="i : ${bank}" th:value="${i.bankName}"><span th:text="${i.bankName}"></span></option>
-      </select>
-    </div>
-    </div>
   </div>
+    <div id="hide">
+      <div class="row auto-align">
+        <div class="col-2">
+          <label for="bankName">Bank Name</label>
+          <select id="bankName" class="form-control" name="bankName" >
+            <option th:each="i : ${bank}" th:value="${i.bankName}"><span th:text="${i.bankName}"></span></option>
+          </select>
+        </div>
+        <div class="col-2">
+          <label for="bankIfsc">Bank IFSC Code</label>
+          <select id="bankIfsc" class="form-control" name="bankName" >
+            <option th:each="i : ${bank}" th:value="${i.bankIfsc}"><span th:text="${i.bankIfsc}"></span></option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="paymentDate">PaymentDate</label>
+          <input id="paymentDate" name="paymentDate" class="form-control" type="date" th:min="${dateTime}" placeholder="dd/mm/yyyy">
+        </div>
+      </div>
+    </div>
   </form>
   <br>
   <button id="addPurchase" name ="addPurchase" class="btn btn-primary">Add Supplier</button>
     <button id="submit" class="btn btn-primary">Submit</button>
-
-</div>
-
+</div >
 <div class="container">
   <table class="table" id="purchaseTable">
     <thead>
     <tr>
       <th scope="col">S.No</th>
-      <th scope="col">InvDate</th>
+      <th scope="col">Inv Date</th>
       <th scope="col">Supplier</th>
-      <th scope="col">VehicleNo</th>
-      <th scope="col">Quantity</th>
+      <th scope="col">Vehicle No</th>
+      <th scope="col">Type</th>
+      <th scope="col">Qty</th>
       <th scope="col">FAT</th>
       <th scope="col">SNF</th>
-      <th scope="col">TsRate</th>
-      <th scope="col">LtrRate</th>
+      <th scope="col">Ts Rate</th>
+      <th scope="col">Ltr Rate</th>
       <th scope="col">Amount</th>
-      <th scope="col">Type</th>
-      <th scope="col">Payment Status</th>
-      <th scope="col">BankName</th>
-
+      <th scope="col">Pay Status</th>
+      <th scope="col">Bank Name</th>
+      <th scope="col">IFSC</th>
+      <th scope="col">Pay Date</th>
     </tr>
     </thead>
     <tbody>
@@ -300,6 +321,7 @@ input#quantity{
 <script>
 $(document).ready(function() {
   $('#invDate').val(new Date().toISOString().slice(0, 10));
+    $('#paymentDate').val(new Date().toISOString().slice(0, 10));
 $("#hide").hide();
 });
     // add prod start
@@ -312,6 +334,8 @@ var supplierName= $("#supplierName").val();
  //alert(supplierName);
  var vehicleNo= $("#vehicleNo").val();
  //alert(vehicleNo);
+ var milkType= $("#milkType").val();
+//alert(milkType);
 var quantity= $("#quantity").val();
 // alert(quantity);
 var fatP= $("#fatP").val();
@@ -332,18 +356,21 @@ if (isNaN(tsRate) || tsRate < 300 || tsRate > 400) {
     return;
   }
 //alert(tsRate);
-var milkType= $("#milkType").val();
-//alert(milkType);
+
 var bankName= $("#bankName").val();
 //alert(bankName);
+var bankIfsc= $("#bankIfsc").val();
+//alert(bankIfsc);
 var paymentStatus= $("#paymentStatus").val();
 //alert(paymentStatus);
 var ltrRate = ((parseFloat(fatP)+parseFloat(snfP))*parseFloat(tsRate)/100).toFixed(2);
  alert(ltrRate);
 var amt= ((parseFloat(ltrRate))*quantity).toFixed(2);
 alert(amt);
+var paymentDate= $("#paymentDate").val();
+ //alert(paymentDate);
 <!--var slNo=0;-->
-$("#purchaseTable").append('<tr><td class="number">'+(slNo+1)+'</td><td>'+invDate+'</td><td>'+supplierName+'</td><td>'+vehicleNo+'</td><td>'+quantity+'</td><td>'+fatP+'</td><td>'+snfP+'</td><td>'+tsRate+'</td><td>'+ltrRate+'</td><td>'+amt+'</td><td>'+milkType+'</td><td>'+paymentStatus+'</td><td>'+bankName+'</td></tr>');
+$("#purchaseTable").append('<tr><td class="number">'+(slNo+1)+'</td><td>'+invDate+'</td><td>'+supplierName+'</td><td>'+vehicleNo+'</td><td>'+quantity+'</td><td>'+fatP+'</td><td>'+snfP+'</td><td>'+tsRate+'</td><td>'+ltrRate+'</td><td>'+amt+'</td><td>'+milkType+'</td><td>'+paymentStatus+'</td><td>'+bankName+'</td><td>'+bankIfsc+'</td><td>'+paymentDate+'</td></tr>');
     $("td.number").each(function(i,v) {
     $(v).text(i + 1);
 });
@@ -362,6 +389,8 @@ var supplierName=$("#supplierName").val();
 //alert(supplierName);
 var vehicleNo=$("#svehicleNo").val();
 //alert(vehicleNo);
+var milkType= $("#milkType").val();
+//alert(milkType);
 var quantity=$("#quantity").val();
 //alert(quantity);
 var fatP= $("#fatP").val();
@@ -378,26 +407,32 @@ var ltrRate=$("#ltrRate").text();
 alert(ltrRate);
 var amt=$("#amt").text();
 alert(amt);
-var milkType= $("#milkType").val();
-//alert(milkType);
+
 var bankName= $("#bankName").val();
+//alert(bankName);
+var bankIfsc= $("#bankIfsc").val();
 //alert(bankName);
 var paymentStatus= $("#paymentStatus").val();
 //alert( paymentStatus);
+var paymentDate= $("#paymentDate").val();
+//alert( paymentDate);
 $('#purchaseTable tr:not(:has(th))').each(function() {
 var slNo = $(this).find("td").eq(0).html();
 var invDate = $(this).find("td").eq(1).html();
 var supplierName = $(this).find("td").eq(2).html();
 var vehicleNo = $(this).find("td").eq(3).html();
-var quantity =  $(this).find("td").eq(4).html();
-var fatP = $(this).find("td").eq(5).html();
-var snfP = $(this).find("td").eq(6).html();
-var tsRate = $(this).find("td").eq(7).html();
-var ltrRate = $(this).find("td").eq(8).html();
-var amt = $(this).find("td").eq(9).html();
-var  milkType = $(this).find("td").eq(10).html();
+var  milkType = $(this).find("td").eq(4).html();
+var quantity =  $(this).find("td").eq(5).html();
+var fatP = $(this).find("td").eq(6).html();
+var snfP = $(this).find("td").eq(7).html();
+var tsRate = $(this).find("td").eq(8).html();
+var ltrRate = $(this).find("td").eq(9).html();
+var amt = $(this).find("td").eq(10).html();
+
 var  paymentStatus = $(this).find("td").eq(11).html();
 var  bankName = $(this).find("td").eq(12).html();
+var  bankIfsc = $(this).find("td").eq(13).html();
+var  paymentDate = $(this).find("td").eq(14).html();
 
 purchaseOrder.push({
            slNo:slNo,
@@ -412,7 +447,9 @@ purchaseOrder.push({
            amt :amt,
            milkType:milkType,
            paymentStatus:paymentStatus,
-           bankName:bankName
+           bankName:bankName,
+           bankIfsc : bankIfsc,
+           paymentDate :paymentDate
 
 });
 });

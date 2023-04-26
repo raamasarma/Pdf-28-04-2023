@@ -42,15 +42,39 @@
    text-align: center;
 }
  input#supplierName{
-  width:200px;
+  width:250px;
   border:1px solid blue;
   border-radius:2px
   outline:0;
   padding:3px;
   background-colour:#fff;
   }
-   input#supAddress{
-  width:200px;
+   input#supAddress1{
+  width:250px;
+  border:1px solid blue;
+  border-radius:2px
+  outline:0;
+  padding:3px;
+  background-colour:#fff;
+  }
+  input#supAddress2{
+  width:250px;
+  border:1px solid blue;
+  border-radius:2px
+  outline:0;
+  padding:3px;
+  background-colour:#fff;
+  }
+  input#supAddress3{
+  width:250px;
+  border:1px solid blue;
+  border-radius:2px
+  outline:0;
+  padding:3px;
+  background-colour:#fff;
+  }
+  input#pinCode{
+  width:250px;
   border:1px solid blue;
   border-radius:2px
   outline:0;
@@ -58,7 +82,7 @@
   background-colour:#fff;
   }
    input#supEmail{
-  width:200px;
+  width:250px;
   border:1px solid blue;
   border-radius:2px
   outline:0;
@@ -66,7 +90,7 @@
   background-colour:#fff;
   }
    input#supMobile{
-  width:200px;
+  width:250px;
   border:1px solid blue;
   border-radius:2px
   outline:0;
@@ -120,58 +144,42 @@
                     <div class="row auto-align">
                         <div class="col">
                         <label> Name</label>
-                        <input
-                                type="text"
-                                name="supplierName"
-                                id="supplierName"
-                                th:field="*{supplierName}"
-                                class="form-control">
-<!--                                required title="Enter  Supplier Name"-->
-
+                        <input  type="text" name="supplierName" id="supplierName" th:field="*{supplierName}"  class="form-control"/>
                         </div>
-
                         <div class="col">
-                            <label> Address</label>
-                            <input
-                                    type="text"
-                                    name="supAddress"
-                                    id="supAddress"
-                                    th:field="*{supAddress}"
-                                    class="form-control"
-                                   />
-
-
-                    </div>
+                            <label> Mobile No</label>
+                            <input type="text" name="supMobile" id="supMobile"  th:field="*{supMobile}" class="form-control"/>
+                        </div>
                         <div class="col">
                             <label> Email</label>
-                            <input
-                                    type="text"
-                                    name="supEmail"
-                                    id="supEmail"
-                                    th:field="*{supEmail}"
-                                    class="form-control"
-                                    />
-
-                    </div>
-
-                            <div class="col">
-                                <label> Mobile No</label>
-                                <input
-                                        type="text"
-                                        name="supMobile"
-                                        id="supMobile"
-                                        th:field="*{supMobile}"
-                                        class="form-control"
-                                          >
-
+                            <input type="text"  name="supEmail" id="supEmail" th:field="*{supEmail}" class="form-control"/>
+                        </div>
+                        <div class="col">
+                            <label> Address1</label>
+                            <input type="text"  name="supAddress1" id="supAddress1" th:field="*{supAddress1}"  class="form-control"/>
                         </div>
                     </div>
                     <br>
-                    <div class="box-footer">
+                    <div class="row auto-align">
+                    <br>
+                    <div class="col">
+                        <label> Address2</label>
+                        <input  type="text" name="supAddress2" id="supAddress2" th:field="*{supAddress2}"  class="form-control"/>
+                    </div>
+                    <div class="col">
+                        <label>Address3</label>
+                        <input type="text" name="supAddress3" id="supAddress3"  th:field="*{supAddress3}" class="form-control"/>
+                    </div>
+                    <div class="col-6">
+                        <label>Pin Code</label>
+                        <input type="text"  name="pinCode" id="pinCode" th:field="*{pinCode}" class="form-control"/>
+                    </div>
+                </div>
+                    <br>
                         <button type="submit" class="btn btn-primary">
                             Submit
                         </button>
-                    </div>
+
                 </form>
 </div>
 <div class="errorMessage"></div>

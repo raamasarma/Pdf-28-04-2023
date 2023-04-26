@@ -96,7 +96,7 @@ input#toDate{
         <div class="row auto-align">
 
             <div class="col-3">
-                <label for="supplierName">supplierName</label>
+                <label for="supplierName">Supplier Name</label>
                 <select id="supplierName" class="form-control" name="supplierName">
                     <option> --- Select Supplier Name ---</option>
                     <option th:each="i : ${supplier}" th:value="${i.supplierCode}"><span th:text="${i.supplierName}"></span> - <span

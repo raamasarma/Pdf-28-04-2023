@@ -186,15 +186,17 @@ public class purchaseOrderController {
                 po.setInvDate(list.getInvDate());
                 po.setSupplier(list.getSupplier());
                 po.setVehicleNo(list.getVehicleNo());
+                po.setMilkType(list.getMilkType());
                 po.setQuantity(list.getQuantity());
                 po.setFatP(list.getFatP());
                 po.setSnfP(list.getSnfP());
                 po.setTsRate(list.getTsRate());
                 po.setLtrRate(list.getLtrRate());
                 po.setAmt(list.getAmt());
-                po.setMilkType(list.getMilkType());
                 po.setPaymentStatus(list.getPaymentStatus());
                 po.setBankName(list.getBankName());
+                po.setBankIfsc(list.getBankIfsc());
+                po.setPaymentDate(list.getPaymentDate());
                 po.setInvNo(invNo+subOrder);
 
                 purchaseOrderRepository.save(po);
@@ -227,4 +229,37 @@ public class purchaseOrderController {
         System.out.println("Excel Size -- "+list.size());
         return "redirect:/purchaseExcelData";
     }
+    @GetMapping("/purchaseViewData")
+    public String purchaseViewOrderForm(Model model, HttpSession session) {
+        if (session.getAttribute("loggedIn").equals("yes")) {
+            List<supplier> Suppliers = supplierRepository.findByOrderByIdDesc();
+
+            purchaseOrder po = new purchaseOrder();
+            model.addAttribute("purchase", po);
+            model.addAttribute("supplier", Suppliers);
+            return "purchaseView";
+        }
+        List messages = new ArrayList<>();
+        messages.add("Login First");
+        model.addAttribute("messages", messages);
+        return "redirect:/loginPage";
+    }
+
+    @PostMapping("/purchaseViewData")
+    public String purchaseOrder(@RequestParam Map<String, String> body, Model model, HttpServletResponse response, HttpServletRequest request) {
+        System.out.println(body);
+        purchaseOrder po = new purchaseOrder();
+        System.out.println("SupplierCode:" + body.get("code"));
+        po.setSupplier(body.get("supplierName"));
+        po.setInvDate(LocalDate.parse(body.get("invDate")));
+        po.setRecDate(LocalDate.parse(body.get("recDate")));
+        // excel data list
+        List<purchaseOrder> list = purchaseOrderRepository.findBySupplierAndInvDateBetween(po.getSupplier(), po.getInvDate(), po.getRecDate());
+        List<supplier> Suppliers = supplierRepository.findByOrderByIdDesc();
+        model.addAttribute("supplier", Suppliers);
+        model.addAttribute("list", list);
+        System.out.println("Excel Size -- " + list.size());
+        return "/purchaseView";
+    }
+
 }

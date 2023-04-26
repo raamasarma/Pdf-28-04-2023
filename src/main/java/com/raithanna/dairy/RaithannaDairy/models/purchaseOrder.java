@@ -39,7 +39,8 @@ public class purchaseOrder extends DownloadSuperBean{
     private String bankName;
     private String paymentStatus;
     private String VehicleNo;
-    //private String format;
+    private String paymentDate;
+    private String bankIfsc;
    public void mapToVariables(@NotNull Map purchase) throws ParseException {
        this.supplier = purchase.get("supplier").toString();
    }

@@ -20,8 +20,11 @@ public class supplier {
     private Integer id;
     private String supplierName;
    private String supplierCode;
-   private String supAddress;
+   private String supAddress1;
+    private String supAddress2;
+    private String supAddress3;
    private String SupEmail;
    private String supMobile;
+    private String pinCode;
 
 }
