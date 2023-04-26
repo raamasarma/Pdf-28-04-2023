@@ -183,57 +183,56 @@ button {
 <!--   height: 5%;-->
 <!--   text-align: left;-->
 <!--}-->
+.header_bar {
+    position: top;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  background-color: blue;
+    text-align: center;
+    }
+
+.footer_bar {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: blue;
+   text-align: center;
+}
 
   </style>
-
 </head>
-<body class="main-bg">
+<body style="background-color:#fff;">
+<div th:replace="fragments/navbar :: navbar_header"></div>
 <div class="container">
-    <!--<h2>Registration Form</h2>-->
-
-
-
     <center><h2><font color="#000080 ">
         <b>Register</b> </font></h2></center>
-
     <p class="subText"><font color="green ">
-        <b>Please Register Hear...!!!</b> </font></p>
-
-
+        <b>Please Register Here...!!!</b> </font></p>
     <form  action="register" method="post">
-
         <input type="text" class="formValidation" name="name" id = "name" placeholder="Name*">
         <input type="text"  class="formValidation"  name="mobile" id="phone" placeholder="phone*" maxlength="10" pattern="\d{10}" required title="Enter number" autocomplete="off">
-
         <input type="text" class="inputValidation" name="role" id="role" value="Customer" style="display:none;">
         <input type="text" class="inputValidation" name="branch" id="branch" value="Raithanna"style="display:none;">
-
         <input type="email" class="formValidation" name="email" id="inputEmail4" placeholder="Email*">
         <input type="password" class="formValidation" name="password" id="inputPassword4" placeholder="Password*" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
         <input type="text" class="formValidation" name="address" id="inputAddress" placeholder="1234 Main St*" pattern="[A-Za-z]+">
         <input type="text" class="formValidation" name="city" id="inputCity" placeholder="city*">
-
         <select id="inputstate" class="inputValidation" name="state">
             <option value="">Select A State *</option>
             <option value="Andhra Pradesh">Andhra Pradesh</option>
             <option value="Telengana">Telengana</option>
         </select>
-
         <input type="text" class="formValidation" name="pincode" id="inputZip" placeholder="pincode*">
-
-
-
         <button id="submit" type="" class = "btn btn-primary">
             <center>Submit</center>
         </button>
     </form>
-
     <div class="errorMessage"></div>
-
-
 </div>
+<div th:replace="fragments/navbar :: navbar_footer"></div>
 </body>
-
 <script type="text/javascript">
     $(".formValidation").on("submit", function(e){
 
@@ -257,8 +256,5 @@ button {
 
   errorMessage.slideDown(700);
 }); //Form .submit
-
-
-
 </script>
 </html>

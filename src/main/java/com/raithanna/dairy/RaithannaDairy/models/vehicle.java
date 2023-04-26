@@ -14,14 +14,9 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class supplier {
+public class vehicle {
     @Id
-@GeneratedValue
+    @GeneratedValue
     private Integer id;
-    private String supplierName;
-   private String supplierCode;
-   private String supAddress;
-   private String SupEmail;
-   private String supMobile;
-
+    private String vehicleNo;
 }

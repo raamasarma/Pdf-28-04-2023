@@ -17,8 +17,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title></title>
     <style>
-    #recDate{
-  width:300px;
+    #supplierName{
+  width:200px;
   border:1px solid blue;
   border-radius:2px
   outline:0;
@@ -26,8 +26,8 @@
   background-colour:#fff;
   text-align: center;
   }
-  input#quantity{
-  width:100px;
+  input#fromDate{
+  width:150px;
   border:1px solid blue;
   border-radius:2px
   outline:0;
@@ -35,8 +35,8 @@
   background-colour:#fff;
   text-align: center;
   }
-input#fatP{
-  width:100px;
+input#toDate{
+  width:150px;
   border:1px solid blue;
   border-radius:2px
   outline:0;
@@ -86,13 +86,16 @@ input#fatP{
 </head>
 <body style="background-color:Blonde;">
 <div class="container">
-    <h1 class="text-center">Download Purchase Order Data</h1>
-    </font></h4>
+    <br>
+    <br>
+    <h4 class = "text-middle"> <font color="#000080 ">
+        <b>Download Purchase Order</b> </font></h4>
+
     <hr>
     <form th:action="@{/purchaseExcelData}" th:object="${purchase}" method="POST">
         <div class="row auto-align">
 
-            <div class="col">
+            <div class="col-3">
                 <label for="supplierName">supplierName</label>
                 <select id="supplierName" class="form-control" name="supplierName">
                     <option> --- Select Supplier Name ---</option>
@@ -100,7 +103,7 @@ input#fatP{
                             th:text="${i.supplierCode}"></span></option>
                 </select>
             </div>
-            <div class="col">
+            <div class="col-3">
                 <label for="fromDate">From Data</label>
                 <input id="fromDate" name="invDate" class="form-control" type="date" th:min="${dateTime}" placeholder="dd/mm/yyyy">
             </div>

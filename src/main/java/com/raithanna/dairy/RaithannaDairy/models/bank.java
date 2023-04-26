@@ -19,4 +19,6 @@ public class bank {
     @GeneratedValue
     private Integer id;
     private String bankName;
+    private String bankIfsc;
+    private String branchName;
 }
