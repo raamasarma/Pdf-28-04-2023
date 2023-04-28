@@ -195,7 +195,7 @@ public class purchaseOrderController {
                 po.setAmt(list.getAmt());
                 po.setPaymentStatus(list.getPaymentStatus());
                 po.setBankName(list.getBankName());
-                po.setBankIfsc(list.getBankIfsc());
+                //po.setBankIfsc(list.getBankIfsc());
                 po.setPaymentDate(list.getPaymentDate());
                 po.setInvNo(invNo+subOrder);
 

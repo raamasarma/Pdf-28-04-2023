@@ -191,6 +191,7 @@ table td { border: 3px solid black }
             <td scope="col"><span th:text="${lists.amt}"></span></td>
             <td scope="col"><span th:text="${lists.paymentStatus}"></span></td>
             <td scope="col"><span th:text="${lists.bankName}"></span></td>
+            <td scope="col"><span th:text="${lists.paymentDate}"></span></td>
           </tr>
           <tbody>
         </table>
@@ -226,7 +227,8 @@ url: '/purchaseViewData',
                "fatP":"",
                "tsRate":"",
                "paymentStatus":"",
-               "bankName":""
+               "bankName":"",
+               "paymentDate":""
             },
             success: function(data) {
    //alert("Order Not Exists");

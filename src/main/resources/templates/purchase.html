@@ -215,42 +215,42 @@ input#quantity{
     <div class="col">
       <label for="quantity">Qty In KG's</label>
       <input
-              type="text"
+              type="number "
               name="quantity"
               id="quantity"
               th:field="*{quantity}"
-              class="form-control"
+              class="form-control" data-decimal="0" oninput="enforceNumberValidation(this)"  value=""
       />
     </div>
     <div class="col">
       <label for="fatP">FAT</label>
       <input
-              type="text"
+              type="number"
               name="fatP"
               id="fatP"
               th:field="*{fatP}"
-              class="form-control"
-              maxlength="4-5" pattern="\d{5}"
+              class="form-control" data-decimal="1" oninput="enforceNumberValidation(this)"  value=""
+
       />
     </div>
     <div class="col">
       <label for="snfP">SNF</label>
       <input
-              type="text"
+              type="number"
               name="snfP"
               id="snfP"
               th:field="*{snfP}"
-              class="form-control"  maxlength="5-12" pattern="\d{5}"
+              class="form-control"  data-decimal="2" oninput="enforceNumberValidation(this)"  value=""
       />
     </div>
     <div class="col">
       <label for="tsRate">TS Rate</label>
       <input
-              type="text"
+              type="number"
               name="tsRate"
               id="tsRate"
               th:field="*{tsRate}"
-              class="form-control"  maxlength="300-400" pattern="\d{5}"
+              class="form-control" data-decimal="1" oninput="enforceNumberValidation(this)"  value=""
       />
     </div>
     </div>
@@ -274,12 +274,12 @@ input#quantity{
             <option th:each="i : ${bank}" th:value="${i.bankName}"><span th:text="${i.bankName}"></span></option>
           </select>
         </div>
-        <div class="col-2">
-          <label for="bankIfsc">Bank IFSC Code</label>
-          <select id="bankIfsc" class="form-control" name="bankName" >
-            <option th:each="i : ${bank}" th:value="${i.bankIfsc}"><span th:text="${i.bankIfsc}"></span></option>
-          </select>
-        </div>
+<!--        <div class="col-2">-->
+<!--          <label for="bankIfsc">Bank IFSC Code</label>-->
+<!--          <select id="bankIfsc" class="form-control" name="bankName" >-->
+<!--            <option th:each="i : ${bank}" th:value="${i.bankIfsc}"><span th:text="${i.bankIfsc}"></span></option>-->
+<!--          </select>-->
+<!--        </div>-->
         <div class="col">
           <label for="paymentDate">PaymentDate</label>
           <input id="paymentDate" name="paymentDate" class="form-control" type="date" th:min="${dateTime}" placeholder="dd/mm/yyyy">
@@ -327,7 +327,9 @@ $("#hide").hide();
     // add prod start
 $('#addPurchase').click(function() {
 var slNo=$("#slNo").val();
-
+var fields = selectedValue.split(' - ');
+var product = fields[0];
+var unitRate = fields[1];
 var invDate= $("#invDate").val();
  //alert(invDate);
 var supplierName= $("#supplierName").val();
@@ -359,7 +361,7 @@ if (isNaN(tsRate) || tsRate < 300 || tsRate > 400) {
 
 var bankName= $("#bankName").val();
 //alert(bankName);
-var bankIfsc= $("#bankIfsc").val();
+//var bankIfsc= $("#bankIfsc").val();
 //alert(bankIfsc);
 var paymentStatus= $("#paymentStatus").val();
 //alert(paymentStatus);
@@ -370,7 +372,7 @@ alert(amt);
 var paymentDate= $("#paymentDate").val();
  //alert(paymentDate);
 <!--var slNo=0;-->
-$("#purchaseTable").append('<tr><td class="number">'+(slNo+1)+'</td><td>'+invDate+'</td><td>'+supplierName+'</td><td>'+vehicleNo+'</td><td>'+quantity+'</td><td>'+fatP+'</td><td>'+snfP+'</td><td>'+tsRate+'</td><td>'+ltrRate+'</td><td>'+amt+'</td><td>'+milkType+'</td><td>'+paymentStatus+'</td><td>'+bankName+'</td><td>'+bankIfsc+'</td><td>'+paymentDate+'</td></tr>');
+$("#purchaseTable").append('<tr><td class="number">'+(slNo+1)+'</td><td>'+invDate+'</td><td>'+supplierName+'</td><td>'+vehicleNo+'</td><td>'+quantity+'</td><td>'+fatP+'</td><td>'+snfP+'</td><td>'+tsRate+'</td><td>'+ltrRate+'</td><td>'+amt+'</td><td>'+milkType+'</td><td>'+paymentStatus+'</td><td>'+bankName+'</td><td>'+paymentDate+'</td></tr>');
     $("td.number").each(function(i,v) {
     $(v).text(i + 1);
 });
@@ -410,7 +412,7 @@ alert(amt);
 
 var bankName= $("#bankName").val();
 //alert(bankName);
-var bankIfsc= $("#bankIfsc").val();
+//var bankIfsc= $("#bankIfsc").val();
 //alert(bankName);
 var paymentStatus= $("#paymentStatus").val();
 //alert( paymentStatus);
@@ -428,10 +430,9 @@ var snfP = $(this).find("td").eq(7).html();
 var tsRate = $(this).find("td").eq(8).html();
 var ltrRate = $(this).find("td").eq(9).html();
 var amt = $(this).find("td").eq(10).html();
-
 var  paymentStatus = $(this).find("td").eq(11).html();
 var  bankName = $(this).find("td").eq(12).html();
-var  bankIfsc = $(this).find("td").eq(13).html();
+//var  bankIfsc = $(this).find("td").eq(13).html();
 var  paymentDate = $(this).find("td").eq(14).html();
 
 purchaseOrder.push({
@@ -439,16 +440,15 @@ purchaseOrder.push({
            invDate:invDate,
            supplier:supplierName,
            vehicleNo:vehicleNo,
+            milkType:milkType,
            quantity:quantity,
            fatP:fatP,
            snfP:snfP,
            tsRate:tsRate,
            ltrRate :ltrRate,
            amt :amt,
-           milkType:milkType,
            paymentStatus:paymentStatus,
            bankName:bankName,
-           bankIfsc : bankIfsc,
            paymentDate :paymentDate
 
 });
@@ -480,4 +480,39 @@ $("#hide").hide();
      }
      });
 </script>
+<script>
+<!--$('#fatP').keypress(function(e) {-->
+<!--var arr = [];-->
+<!--var kk = e.which;-->
+
+<!--for (i = 52; i < 54; i++)-->
+<!--arr.push(i);-->
+
+<!--if (!(arr.indexOf(kk)>=0))-->
+<!--e.preventDefault();-->
+<!--});-->
+
+<!--  function enforceNumberValidation(ele) {-->
+<!--    if ($(ele).data('decimal') != null) {-->
+<!--        // found valid rule for decimal-->
+<!--        var decimal = parseInt($(ele).data('decimal')) || 0;-->
+<!--        var val = $(ele).val();-->
+<!--        if (decimal > 0) {-->
+<!--            var splitVal = val.split('.');-->
+<!--            if (splitVal.length == 2 && splitVal[1].length > decimal) {-->
+<!--                // user entered invalid input-->
+<!--                $(ele).val(splitVal[0] + '.' + splitVal[1].substr(0, decimal));-->
+<!--            }-->
+<!--        } else if (decimal == 0) {-->
+<!--            // do not allow decimal place-->
+<!--            var splitVal = val.split('.');-->
+<!--            if (splitVal.length > 1) {-->
+<!--                // user entered invalid input-->
+<!--                $(ele).val(splitVal[0]); // always trim everything after '.'-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--}-->
+</script>
+
 </html>

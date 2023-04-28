@@ -257,4 +257,16 @@ button {
   errorMessage.slideDown(700);
 }); //Form .submit
 </script>
+<script type="text/javascript">
+$('#phone').keypress(function(e) {
+var arr = [];
+var kk = e.which;
+
+for (i = 48; i < 58; i++)
+arr.push(i);
+
+if (!(arr.indexOf(kk)>=0))
+e.preventDefault();
+});
+</script>
 </html>
